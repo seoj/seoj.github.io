@@ -1,6 +1,6 @@
 {
   "name": "Seoj.GitHub.io",
   "tagline": "",
-  "body": "### About me\r\n### Skills\r\n### Experience\r\n### Education",
+  "body": "### About me\r\n### Skills\r\n|Lorem|Ipsum|\r\n|Lorem|Ipsum|\r\n|Lorem|Ipsum|\r\n### Experience\r\n## Lorem\r\n## Ipsum\r\n### Education",
   "note": "Don't delete this file! It's used internally to help with page regeneration."
 }
