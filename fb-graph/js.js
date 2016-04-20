@@ -254,3 +254,13 @@ function toRGB(h, s, v)
 var model = new Model();
 var view = new View(document.getElementById('canvas'), model);
 var controller = new Controller(model, view);
+
+fitCavnas();
+window.addEventListener('resize', fitCavnas);
+
+function fitCavnas()
+{
+    var canvas = document.getElementById('canvas');
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+}

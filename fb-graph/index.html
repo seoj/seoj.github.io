@@ -1,12 +1,16 @@
 <!doctype html>
 <html>
 <head>
-<meta name="viewport" content="initial-scale=1">
+<link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
-    <b>Force based graph drawing algorithm</b>
-    <p>Click anywhere in the box to add a random node into tree</p>
-    <canvas id="canvas" width="640" height="480" style="border: 1px solid;"></canvas>
+    <div class="layout" style="bottom: auto; height: 50px;">
+        <b>Force based graph drawing algorithm</b>
+        <p>Click anywhere in the box to add a random node into tree</p>
+    </div>
+    <div class="layout" style="top: 50px;">
+        <canvas id="canvas" style="width: 100%; height: 100%; border: 1px solid;"></canvas>
+    </div>
     <script src="js.js"></script>
     <script>
                     controller.initialize();

@@ -1,0 +1,16 @@
+html {
+   font: 10pt helvetica;
+}
+
+body {
+   margin: 0px;
+}
+
+.layout {
+   top: 0px;
+   bottom: 0px;
+   left: 0px;
+   right: 0px;
+   position: absolute;
+   overflow: hidden;
+}
