@@ -105,8 +105,8 @@ function View(model, canvas, config) {
     this.canvas.onclick = function(mouseEvent) {
         var eventHandler = self.eventHandler;
         if (eventHandler.onclick) {
-            var x = mouseEvent.clientX;
-            var y = mouseEvent.clientY;
+            var x = mouseEvent.offsetX;
+            var y = mouseEvent.offsetY;
             eventHandler.onclick(x, y);
         }
     };
