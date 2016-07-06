@@ -85,10 +85,11 @@ class Maze {
 }
 
 class View {
-    constructor(canvas, model) {
+    constructor(canvas, model, options) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.model = model;
+        this.options = options;
 
         window.onresize = () => {
             this.update();
@@ -111,65 +112,67 @@ class View {
                 this.ctx.fillRect(x * resX, y * resY, resX, resY);
             }
         }
-        for (let x = 0; x < this.model.maze.length; x++) {
-            let row = this.model.maze[x];
-            for (let y = 0; y < row.length; y++) {
-                console.log(x, y);
-                if (this.model.inBound({
-                        x,
-                        y: y - 1
-                    }) && this.model.inBound({
-                        x: x + 1,
-                        y
-                    }) && !this.model.maze[x][y - 1] && !this.model.maze[x + 1][y]) {
-                    this.ctx.moveTo(x * resX, y * resY);
-                    this.ctx.lineTo((x + 1) * resX, y * resY);
-                    this.ctx.lineTo((x + 1) * resX, (y + 1) * resY);
-                    this.ctx.closePath();
-                    this.ctx.fillStyle = 'rgb(0,0,0)';
-                    this.ctx.fill();
-                }
-                if (this.model.inBound({
-                        x: x + 1,
-                        y
-                    }) && this.model.inBound({
-                        x,
-                        y: y + 1
-                    }) && !this.model.maze[x + 1][y] && !this.model.maze[x][y + 1]) {
-                    this.ctx.moveTo((x + 1) * resX, y * resY);
-                    this.ctx.lineTo((x + 1) * resX, (y + 1) * resY);
-                    this.ctx.lineTo(x * resX, (y + 1) * resY);
-                    this.ctx.closePath();
-                    this.ctx.fillStyle = 'rgb(0,0,0)';
-                    this.ctx.fill();
-                }
-                if (this.model.inBound({
-                        x,
-                        y: y + 1
-                    }) && this.model.inBound({
-                        x: x - 1,
-                        y
-                    }) && !this.model.maze[x][y + 1] && !this.model.maze[x - 1][y]) {
-                    this.ctx.moveTo(x * resX, y * resY);
-                    this.ctx.lineTo(x * resX, (y + 1) * resY);
-                    this.ctx.lineTo((x + 1) * resX, (y + 1) * resY);
-                    this.ctx.closePath();
-                    this.ctx.fillStyle = 'rgb(0,0,0)';
-                    this.ctx.fill();
-                }
-                if (this.model.inBound({
-                        x: x - 1,
-                        y
-                    }) && this.model.inBound({
-                        x,
-                        y: y - 1
-                    }) && !this.model.maze[x - 1][y] && !this.model.maze[x][y - 1]) {
-                    this.ctx.moveTo(x * resX, (y + 1) * resY);
-                    this.ctx.lineTo(x * resX, y * resY);
-                    this.ctx.lineTo((x + 1) * resX, y * resY);
-                    this.ctx.closePath();
-                    this.ctx.fillStyle = 'rgb(0,0,0)';
-                    this.ctx.fill();
+        if (this.options.smooth) {
+            for (let x = 0; x < this.model.maze.length; x++) {
+                let row = this.model.maze[x];
+                for (let y = 0; y < row.length; y++) {
+                    console.log(x, y);
+                    if (this.model.inBound({
+                            x,
+                            y: y - 1
+                        }) && this.model.inBound({
+                            x: x + 1,
+                            y
+                        }) && !this.model.maze[x][y - 1] && !this.model.maze[x + 1][y]) {
+                        this.ctx.moveTo(x * resX, y * resY);
+                        this.ctx.lineTo((x + 1) * resX, y * resY);
+                        this.ctx.lineTo((x + 1) * resX, (y + 1) * resY);
+                        this.ctx.closePath();
+                        this.ctx.fillStyle = 'rgb(0,0,0)';
+                        this.ctx.fill();
+                    }
+                    if (this.model.inBound({
+                            x: x + 1,
+                            y
+                        }) && this.model.inBound({
+                            x,
+                            y: y + 1
+                        }) && !this.model.maze[x + 1][y] && !this.model.maze[x][y + 1]) {
+                        this.ctx.moveTo((x + 1) * resX, y * resY);
+                        this.ctx.lineTo((x + 1) * resX, (y + 1) * resY);
+                        this.ctx.lineTo(x * resX, (y + 1) * resY);
+                        this.ctx.closePath();
+                        this.ctx.fillStyle = 'rgb(0,0,0)';
+                        this.ctx.fill();
+                    }
+                    if (this.model.inBound({
+                            x,
+                            y: y + 1
+                        }) && this.model.inBound({
+                            x: x - 1,
+                            y
+                        }) && !this.model.maze[x][y + 1] && !this.model.maze[x - 1][y]) {
+                        this.ctx.moveTo(x * resX, y * resY);
+                        this.ctx.lineTo(x * resX, (y + 1) * resY);
+                        this.ctx.lineTo((x + 1) * resX, (y + 1) * resY);
+                        this.ctx.closePath();
+                        this.ctx.fillStyle = 'rgb(0,0,0)';
+                        this.ctx.fill();
+                    }
+                    if (this.model.inBound({
+                            x: x - 1,
+                            y
+                        }) && this.model.inBound({
+                            x,
+                            y: y - 1
+                        }) && !this.model.maze[x - 1][y] && !this.model.maze[x][y - 1]) {
+                        this.ctx.moveTo(x * resX, (y + 1) * resY);
+                        this.ctx.lineTo(x * resX, y * resY);
+                        this.ctx.lineTo((x + 1) * resX, y * resY);
+                        this.ctx.closePath();
+                        this.ctx.fillStyle = 'rgb(0,0,0)';
+                        this.ctx.fill();
+                    }
                 }
             }
         }
@@ -179,6 +182,7 @@ class View {
 var canvas = document.getElementsByTagName('canvas')[0];
 
 var search = window.location.search;
+search = search.substring(1, search.length);
 var searchKVs = search.split('&');
 var params = {};
 searchKVs.forEach(kv => {
@@ -188,11 +192,14 @@ searchKVs.forEach(kv => {
     params[key] = value;
 });
 
-var width = params.width || 50;
-var height = params.height || 50;
+var width = parseInt(params.width) || 50;
+var height = parseInt(params.height) || 50;
+var smooth = params.smooth === 'true';
 
 var model = new Maze(width, height);
-var view = new View(canvas, model);
+var view = new View(canvas, model, {
+    smooth
+});
 
 model.generate();
 view.update();
