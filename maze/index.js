@@ -178,7 +178,20 @@ class View {
 
 var canvas = document.getElementsByTagName('canvas')[0];
 
-var model = new Maze(30, 30);
+var search = window.location.search;
+var searchKVs = search.split('&');
+var params = {};
+searchKVs.forEach(kv => {
+    let pair = kv.split('=');
+    let key = pair[0];
+    let value = pair.length == 2 ? pair[1] : true;
+    params[key] = value;
+});
+
+var width = params.width || 50;
+var height = params.height || 50;
+
+var model = new Maze(width, height);
 var view = new View(canvas, model);
 
 model.generate();
