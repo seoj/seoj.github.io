@@ -49,13 +49,22 @@ class Model {
         this.load();
 
         eventBus.addListener('delete_task', (task) => {
-            this.tasks.splice(this.tasks.indexOf(task), 1);
+            this.deleteTask(task);
         });
+        eventBus.addListener('task_changed', () => {
+            this.persist();
+        });
+    }
+
+    deleteTask(task) {
+        this.tasks.splice(this.tasks.indexOf(task), 1);
+        eventBus.fireEvent('task_changed', task);
     }
 
     addTask() {
         const task = new Task();
         this.tasks.push(task);
+        eventBus.fireEvent('task_changed', this);
         return task;
     }
 
@@ -107,12 +116,14 @@ class Task {
         this.intervals.push(interval);
         interval.start();
         this.status = TaskStatus.RUNNING;
+        eventBus.fireEvent('task_changed', this);
     }
 
     pause() {
         const interval = this.intervals[this.intervals.length - 1];
         interval.stop();
         this.status = TaskStatus.PAUSED;
+        eventBus.fireEvent('task_changed', this);
     }
 
     elapsed() {
@@ -201,10 +212,6 @@ class View {
 
         document.body.appendChild(this.addTaskActionEl);
         document.body.appendChild(this.taskTableEl.element);
-
-        window.addEventListener('unload', () => {
-            this.model.persist();
-        });
 
         this.model.tasks.forEach((task) => {
             this.taskTableEl.addTask(task);
