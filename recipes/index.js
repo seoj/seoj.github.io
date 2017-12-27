@@ -52,6 +52,23 @@ class Recipe {
   }
 }
 
+class Meal {
+  constructor(/** @type {{ recipe:Recipe, servingSize:number }} */ { recipe, servingSize }) {
+    this.recipe = recipe;
+    this.servingSize = servingSize;
+  }
+
+  /** @return {Ingredient[]} */
+  getIngredients() {
+    const factor = this.servingSize / this.recipe.servingSize;
+    return this.recipe.ingredients.map(e => new Ingredient({
+      name: e.name,
+      amount: e.amount * factor,
+      unit: e.unit,
+    }));
+  }
+}
+
 class RecipeSvc {
   constructor() {
     /** @type {Recipe[]} */
@@ -94,32 +111,36 @@ class PlannerCtrl {
   constructor(recipeSvc) {
     /** @type {Recipe[]} */
     this.recipes = recipeSvc.list();
-    /** @type {Recipe[]} */
-    this.plannedRecipes = [];
+    /** @type {Meal[]} */
+    this.meals = [];
     /** @type {Recipe} */
     this.selectedRecipe = null;
+    /** @type {number} */
+    this.selectedRecipeServingSize = 1;
     /** @type {Ingredient[]} */
     this.ingredients = [];
   }
 
-  addSelectedRecipe() {
+  add() {
     if (this.selectedRecipe) {
-      this.plannedRecipes.push(this.selectedRecipe);
+      this.meals.push(new Meal({ recipe: this.selectedRecipe, servingSize: this.selectedRecipeServingSize }));
       this.selectedRecipe = null;
-      this.onChanges();
+      this.selectedRecipeServingSize = 1;
+      this.onChange();
     }
   }
 
-  removePlannedRecipe(recipe) {
-    this.plannedRecipes.splice(this.plannedRecipes.findIndex(e => e === recipe), 1);
-    this.onChanges();
+  /** @param {Meal} meal */
+  remove(meal) {
+    this.meals.splice(this.meals.findIndex(e => e === meal), 1);
+    this.onChange();
   }
 
-  onChanges() {
+  onChange() {
     /** @type {Map<string,Ingredient>} */
     const map = new Map();
-    this.plannedRecipes.forEach(recipe => {
-      recipe.ingredients.forEach(e => {
+    this.meals.forEach(meal => {
+      meal.getIngredients().forEach(e => {
         let ingredient = map.get(e.hash());
         if (!ingredient) {
           ingredient = new Ingredient({

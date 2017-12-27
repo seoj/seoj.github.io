@@ -2,10 +2,13 @@
   <h1>Recipe planner</h1>
   <h2>Planned meals</h2>
   <table>
-    <tr ng-repeat="recipe in $ctrl.plannedRecipes">
-      <td>{{recipe.name}}</td>
+    <tr ng-repeat="meal in $ctrl.meals">
+      <td>{{meal.recipe.name}}</td>
       <td>
-        <button ng-click="$ctrl.removePlannedRecipe(recipe)">Remove</button>
+        <input type="number" ng-model="meal.servingSize" ng-change="$ctrl.onChange()">
+      </td>
+      <td>
+        <button ng-click="$ctrl.remove(meal)">Remove</button>
       </td>
     </tr>
     <tr>
@@ -15,7 +18,10 @@
         </select>
       </td>
       <td>
-        <button ng-click="$ctrl.addSelectedRecipe()">Add</button>
+        <input type="number" ng-model="$ctrl.selectedRecipeServingSize">
+      </td>
+      <td>
+        <button ng-click="$ctrl.add()">Add</button>
       </td>
     </tr>
   </table>
