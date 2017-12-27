@@ -1,0 +1,33 @@
+<section>
+  <h1>Recipe planner</h1>
+  <h2>Planned meals</h2>
+  <table>
+    <tr ng-repeat="recipe in $ctrl.plannedRecipes">
+      <td>{{recipe.name}}</td>
+      <td>
+        <button ng-click="$ctrl.removePlannedRecipe(recipe)">Remove</button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <select ng-model="$ctrl.selectedRecipe">
+          <option ng-repeat="recipe in $ctrl.recipes|orderBy:'name'" ng-value="recipe">{{recipe.name}}</option>
+        </select>
+      </td>
+      <td>
+        <button ng-click="$ctrl.addSelectedRecipe()">Add</button>
+      </td>
+    </tr>
+  </table>
+  <h2>Ingredients</h2>
+  <p ng-if="$ctrl.ingredients.length === 0">Add recipes to the planned meals above to see the list of ingredients.</p>
+  <table ng-if="$ctrl.ingredients.length > 0">
+    <tbody>
+      <tr ng-repeat="ingredient in $ctrl.ingredients">
+        <td>{{ingredient.name}}</td>
+        <td>{{ingredient.amount}}</td>
+        <td>{{ingredient.unit}}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

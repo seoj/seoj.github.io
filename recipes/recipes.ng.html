@@ -1,0 +1,32 @@
+<section>
+  <div>
+    <button ng-click="$ctrl.add()">Add</button>
+  </div>
+  <p ng-if="$ctrl.recipes.length === 0">Start adding recipes by pressing the 'add' button above.</p>
+  <table ng-if="$ctrl.recipes.length > 0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Serving size</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="recipe in $ctrl.recipes">
+        <td>
+          <input ng-model="recipe.name" ng-change="$ctrl.onChange()">
+        </td>
+        <td>
+          <input type="number" ng-model="recipe.servingSize" ng-change="$ctrl.onChange()">
+        </td>
+        <td>
+          <a ng-href="#!/recipes/{{recipe.name}}/ingredients">Ingredients</a>
+        </td>
+        <td>
+          <button ng-click="$ctrl.remove(recipe)">Remove</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

@@ -1,0 +1,33 @@
+<section>
+  <h1>Ingredients for {{$ctrl.recipe.name}}</h1>
+  <div>
+    <button ng-click="$ctrl.add()">Add</button>
+  </div>
+  <p ng-if="$ctrl.recipe.ingredients.length === 0">Add ingredients to this recipe by pressing the 'add' button above.</p>
+  <table ng-if="$ctrl.recipe.ingredients.length > 0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Unit</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="ingredient in $ctrl.recipe.ingredients">
+        <td>
+          <input ng-model="ingredient.name" ng-change="$ctrl.onChange()">
+        </td>
+        <td>
+          <input type="number" ng-model="ingredient.amount" ng-change="$ctrl.onChange()">
+        </td>
+        <td>
+          <input ng-model="ingredient.unit" ng-change="$ctrl.onChange()">
+        </td>
+        <td>
+          <button ng-click="$ctrl.remove(ingredient)">Remove</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
