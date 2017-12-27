@@ -1,0 +1,38 @@
+<h1>Recipes</h1>
+<div>
+  <button ng-click="$ctrl.add()">Add</button>
+</div>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Serving size</th>
+    <th>Ingredients</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="recipe in $ctrl.recipes">
+      <td>
+        <input ng-model="recipe.name" ng-change="$ctrl.onChange()">
+      </td>
+      <td>
+        <input ng-model="recipe.servingSize" ng-change="$ctrl.onChange()">
+      </td>
+      <td>
+        <table>
+          <tbody>
+            <tr ng-repeat="ingredient in recipe.ingredients">
+              <td>{{ingredient.name}}</td>
+              <td>{{ingredient.amount}} {{ingredient.unit}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <a ng-href="#!/recipes/{{recipe.id}}/ingredients">Add more ingredients</a>
+        </div>
+      </td>
+      <td>
+        <button ng-click="$ctrl.remove(recipe)">Remove</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

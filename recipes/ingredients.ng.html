@@ -1,0 +1,28 @@
+<h1>Ingredients</h1>
+<h2>for recipe {{$ctrl.recipe.name}}</h2>
+<div>
+  <button ng-click="$ctrl.add()">Add</button>
+</div>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Amount</th>
+    <th>Unit</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="ingredient in $ctrl.recipe.ingredients">
+      <td>
+        <input ng-model="ingredient.name" ng-change="$ctrl.onChange()">
+      </td>
+      <td>
+        <input type="number" ng-model="ingredient.amount" ng-change="$ctrl.onChange()">
+      </td>
+      <td>
+        <input ng-model="ingredient.unit" ng-change="$ctrl.onChange()">
+      </td>
+      <td>
+        <button ng-click="$ctrl.remove(ingredient)">Remove</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
