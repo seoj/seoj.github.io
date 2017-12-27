@@ -1,18 +1,30 @@
 <!doctype html>
 <html>
+
 <head>
-<meta name="viewport" content="initial-scale=1">
-<style>
-.layout {
-	position: absolute;
-	top: 0px;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
-	overflow: hidden;
-}
-</style>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-111605604-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-111605604-1');
+	</script>
+	<meta name="viewport" content="initial-scale=1">
+	<style>
+		.layout {
+			position: absolute;
+			top: 0px;
+			bottom: 0px;
+			left: 0px;
+			right: 0px;
+			overflow: hidden;
+		}
+
+	</style>
 </head>
+
 <body>
 	<div class="layout" style="bottom: auto; height: 60px;">
 		<b>Force directed graph drawing algorithm</b>
@@ -23,4 +35,5 @@
 	</div>
 	<script src="index.js"></script>
 </body>
+
 </html>
