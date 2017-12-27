@@ -1,4 +1,4 @@
-<section>
+<section class="ingredients">
   <h1>Ingredients for {{$ctrl.recipe.name}}</h1>
   <div>
     <button ng-click="$ctrl.add()">Add</button>
@@ -8,7 +8,7 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Amount</th>
+        <th>Amt.</th>
         <th>Unit</th>
         <th></th>
       </tr>
@@ -16,13 +16,13 @@
     <tbody>
       <tr ng-repeat="ingredient in $ctrl.recipe.ingredients">
         <td>
-          <input ng-model="ingredient.name" ng-change="$ctrl.onChange()">
+          <input class="name" ng-model="ingredient.name" ng-change="$ctrl.onChange()">
         </td>
         <td>
-          <input type="number" ng-model="ingredient.amount" ng-change="$ctrl.onChange()">
+          <input type="number" class="amount" ng-model="ingredient.amount" ng-change="$ctrl.onChange()">
         </td>
         <td>
-          <input ng-model="ingredient.unit" ng-change="$ctrl.onChange()">
+          <input class="unit" ng-model="ingredient.unit" ng-change="$ctrl.onChange()">
         </td>
         <td>
           <button ng-click="$ctrl.remove(ingredient)">Remove</button>
