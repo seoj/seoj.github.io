@@ -43,6 +43,12 @@ class Recipe {
     };
   }
 
+  /** @param {Recipe} recipe */
+  merge(recipe) {
+    this.servingSize = recipe.servingSize;
+    this.ingredients = [...recipe.ingredients];
+  }
+
   static deserialize(serialized) {
     return new Recipe({
       name: serialized.name,
@@ -77,7 +83,7 @@ class RecipeSvc {
 
   /** @return {Recipe[]} */
   list() {
-    return [...this.recipes];
+    return [...this.recipes].sort((a, b) => a.name.localeCompare(b.name));
   }
 
   /** @param {Recipe} recipe */
@@ -95,7 +101,7 @@ class RecipeSvc {
   }
 
   persist() {
-    localStorage.setItem('recipes', JSON.stringify(this.recipes.map(e => e.serialize())));
+    localStorage.setItem('recipes', JSON.stringify(this.generateExport()));
   }
 
   load() {
@@ -103,6 +109,24 @@ class RecipeSvc {
     if (serialized) {
       this.recipes = JSON.parse(serialized).map(e => Recipe.deserialize(e));
     }
+  }
+
+  /** @param {*[]} json */
+  import(json) {
+    const importedRecipes = json.map(e => Recipe.deserialize(e));
+    for (const importedRecipe of importedRecipes) {
+      const existingRecipe = this.recipes.find(e => e.name === importedRecipe.name);
+      if (existingRecipe) {
+        existingRecipe.merge(importedRecipe);
+      } else {
+        this.recipes.push(importedRecipe);
+      }
+    }
+    this.persist();
+  }
+
+  generateExport() {
+    return this.recipes.map(e => e.serialize());
   }
 }
 
@@ -207,6 +231,34 @@ class IngredientsCtrl {
   }
 }
 
+class ImportExportCtrl {
+  /** @param {RecipeSvc} recipeSvc */
+  constructor(recipeSvc) {
+    this.recipeSvc = recipeSvc;
+    this.importText = null;
+    this.exportText = null;
+    this.importMessage = null;
+    this.importError = false;
+  }
+
+  import() {
+    if (this.importText) {
+      try {
+        this.recipeSvc.import(JSON.parse(this.importText));
+        this.importMessage = 'Import success!';
+        this.importError = false;
+      } catch (e) {
+        this.importMessage = `Error! ${e}`;
+        this.importError = true;
+      }
+    }
+  }
+
+  generateExport() {
+    this.exportText = JSON.stringify(this.recipeSvc.generateExport());
+  }
+}
+
 angular.module('recipes', ['ngRoute'])
   .config(($routeProvider) => {
     $routeProvider
@@ -226,6 +278,12 @@ angular.module('recipes', ['ngRoute'])
         controller: IngredientsCtrl,
         controllerAs: '$ctrl',
         templateUrl: 'ingredients.ng.html',
+      })
+
+      .when('/import-export', {
+        controller: ImportExportCtrl,
+        controllerAs: '$ctrl',
+        templateUrl: 'import-export.ng.html',
       });
   })
   .service('recipeSvc', RecipeSvc)

@@ -1,0 +1,18 @@
+<section class="import-export">
+  <h1>Import/Export</h1>
+  <section>
+    <h2>Import</h2>
+    <textarea class="import" ng-model="$ctrl.importText"></textarea>
+    <div>
+      <button ng-click="$ctrl.import()">Import</button>
+      <span ng-class="{error:$ctrl.importError}">{{$ctrl.importMessage}}</span>
+    </div>
+  </section>
+  <section>
+    <h2>Export</h2>
+    <div>
+      <button ng-click="$ctrl.generateExport()">Generate export</button>
+    </div>
+    <textarea class="export" ng-model="$ctrl.exportText" disabled></textarea>
+  </section>
+</section>
