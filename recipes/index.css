@@ -3,19 +3,5 @@ html {
 }
 
 input[type="number"] {
-  width: 2em;
-}
-
-.ingredients input.unit {
   width: 4em;
-}
-
-.import-export textarea.import,
-.import-export textarea.export {
-  width: 100%;
-  height: 10em;
-}
-
-.error {
-  color: red;
 }
