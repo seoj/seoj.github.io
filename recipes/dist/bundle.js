@@ -8,7 +8,7 @@ angular
 	.run(['$templateCache', function($templateCache) {
 		$templateCache.put('ingredients.ng.html', '<section class="ingredients"><h1>Ingredients for {{$ctrl.recipe.name}}</h1><p ng-if="$ctrl.recipe.ingredients.length === 0">No ingredients found for this recipe.</p><table ng-if="$ctrl.recipe.ingredients.length > 0"><thead><tr><th>Name</th><th>Amt.</th><th>Unit</th></tr></thead><tbody><tr ng-repeat="ingredient in $ctrl.recipe.ingredients"><td>{{ingredient.name}}</td><td>{{ingredient.amount}}</td><td>{{ingredient.unit}}</td></tr></tbody></table></section>');
 
-		$templateCache.put('planner.ng.html', '<section><h1>Recipe planner</h1><h2>Planned meals</h2><table><thead><tr><th>Recipe</th><th>Servings</th></tr></thead><tbody><tr ng-repeat="meal in $ctrl.meals"><td>{{meal.recipe.name}}</td><td><input type="number" ng-model="meal.servingSize" ng-change="$ctrl.onChange()"></td><td><button ng-click="$ctrl.remove(meal)">Remove</button></td></tr><tr><td><select ng-model="$ctrl.selectedRecipe"><option ng-repeat="recipe in $ctrl.recipes" ng-value="recipe">{{recipe.name}}</option></select></td><td><input type="number" ng-model="$ctrl.selectedRecipeServingSize"></td><td><button ng-click="$ctrl.add()">Add</button></td></tr></tbody></table><h2>Ingredients</h2><p ng-if="$ctrl.ingredients.length === 0">Add recipes to the planned meals above to see the list of ingredients.</p><table ng-if="$ctrl.ingredients.length > 0"><tbody><tr ng-repeat="ingredient in $ctrl.ingredients"><td>{{ingredient.name}}</td><td>{{ingredient.amount}}</td><td>{{ingredient.unit}}</td></tr></tbody></table></section>');
+		$templateCache.put('planner.ng.html', '<section><h1>Recipe planner</h1><h2>Planned meals</h2><table><thead><tr><th>Recipe</th><th>Servings</th></tr></thead><tbody><tr ng-repeat="meal in $ctrl.meals"><td>{{meal.recipe.name}}</td><td><input type="number" ng-model="meal.servingSize" ng-change="$ctrl.onChange()"></td><td><button ng-click="$ctrl.remove(meal)">Remove</button></td></tr><tr><td><select ng-model="$ctrl.selectedRecipe"><optgroup ng-repeat="e in $ctrl.recipesByCategory" label="{{e.category}}"><option ng-repeat="recipe in e.recipes" ng-value="recipe">{{recipe.name}}</option></optgroup></select></td><td><input type="number" ng-model="$ctrl.selectedRecipeServingSize"></td><td><button ng-click="$ctrl.add()">Add</button></td></tr></tbody></table><h2>Ingredients</h2><p ng-if="$ctrl.ingredients.length === 0">Add recipes to the planned meals above to see the list of ingredients.</p><table ng-if="$ctrl.ingredients.length > 0"><tbody><tr ng-repeat="ingredient in $ctrl.ingredients"><td>{{ingredient.name}}</td><td>{{ingredient.amount}}</td><td>{{ingredient.unit}}</td></tr></tbody></table></section>');
 
 		$templateCache.put('recipes.ng.html', '<section><p ng-if="$ctrl.recipes.length === 0">No recipes found.</p><table ng-if="$ctrl.recipes.length > 0"><thead><tr><th>Name</th><th>Sv. size</th><th></th></tr></thead><tbody><tr ng-repeat="recipe in $ctrl.recipes"><td>{{recipe.name}}</td><td>{{recipe.servingSize}}</td><td><a ng-href="#!/recipes/{{recipe.name}}/ingredients">Ingredients</a></td></tr></tbody></table></section>');
 	}
@@ -35617,8 +35617,8 @@ const RecipeSvc = require('./recipe-service');
 class PlannerCtrl {
   /** @param {RecipeSvc} recipeSvc */
   constructor(recipeSvc) {
-    /** @type {Recipe[]} */
-    this.recipes = [];
+    /** @type {{category:string,recipes:Recipe[]}[]} */
+    this.recipesByCategory = [];
     /** @type {Meal[]} */
     this.meals = [];
     /** @type {Recipe} */
@@ -35629,8 +35629,20 @@ class PlannerCtrl {
     this.ingredients = [];
 
     recipeSvc.list().then(recipes => {
-      this.recipes = recipes;
-      console.log(this.recipes);
+      /** @type {Map<string,Recipe[]>} */
+      const map = new Map();
+      recipes.forEach(recipe => {
+        const list = map.get(recipe.category) || [];
+        map.set(recipe.category, list);
+        list.push(recipe);
+      });
+      map.forEach((value, key) => {
+        this.recipesByCategory.push({
+          category: key,
+          recipes: value,
+        });
+      });
+      this.recipesByCategory.sort((a, b) => a.category.localeCompare(b.category));
     });
   }
 
@@ -35715,14 +35727,16 @@ module.exports = RecipeSvc;
 const Ingredient = require('./ingredient');
 
 class Recipe {
-  constructor(/** @type {{ name:string, servingSize:number, ingredients:Ingredient[] }} */ { name, servingSize = 1, ingredients = [] }) {
+  constructor(/** @type {{ name:string, category:string, servingSize:number, ingredients:Ingredient[] }} */ { name, category, servingSize = 1, ingredients = [] }) {
     this.name = name;
+    this.category = category;
     this.servingSize = servingSize;
     this.ingredients = ingredients;
   }
 
   /** @param {Recipe} recipe */
   merge(recipe) {
+    this.category = recipe.category;
     this.servingSize = recipe.servingSize;
     this.ingredients = [...recipe.ingredients];
   }
@@ -35730,6 +35744,7 @@ class Recipe {
   static deserialize(serialized) {
     return new Recipe({
       name: serialized.name,
+      category: serialized.category,
       servingSize: serialized.servingSize,
       ingredients: serialized.ingredients.map(e => Ingredient.deserialize(e)),
     });
@@ -35739,6 +35754,7 @@ class Recipe {
   static copy(recipe) {
     return new Recipe({
       name: recipe.name,
+      category: recipe.category,
       servingSize: recipe.servingSize,
       ingredients: recipe.ingredients,
     });
