@@ -27,15 +27,12 @@
     flex: 1;
   }
 
-  canvas {
-    width: 100%;
-  }
 </style>
 
 <body ng-cloak ng-app="chaos" ng-controller="MainCtrl as $ctrl">
   <pre>t = {{$ctrl.t}}</pre>
   <md-slider-container>
-    <md-slider min="-3" max="3" ng-model="$ctrl.t" step="0.00001" ng-change="$ctrl.render()"></md-slider>
+    <md-slider min="-1" max="1" ng-model="$ctrl.t" step="0.00001" ng-change="$ctrl.render()"></md-slider>
   </md-slider-container>
   <canvas width="500" height="500"></canvas>
   <script src="main.js"></script>

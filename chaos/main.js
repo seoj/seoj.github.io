@@ -10,7 +10,8 @@ function doit(t) {
   const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext('2d');
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'black';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   const minX = -2;
   const minY = -2;
@@ -23,6 +24,8 @@ function doit(t) {
   let x = t;
   let y = t;
 
+  let prevX = null;
+  let prevY = null;
 
   for (let i = 0; i < maxIterations; i++) {
     const xx = x * x;
@@ -69,13 +72,26 @@ function doit(t) {
     const a = x * rx + (canvas.width / 2);
     const b = (canvas.height / 2) - y * ry;
 
+
+    // if (i === 0) {
     ctx.fillStyle = getColor(i);
     ctx.fillRect(a, b, 1, 1);
+    // }
+    // else {
+    //   ctx.beginPath();
+    //   ctx.strokeStyle = getColor(i);
+    //   ctx.moveTo(prevX, prevY);
+    //   ctx.lineTo(a, b);
+    //   ctx.stroke();
+    // }
+
+    // prevX = a;
+    // prevY = b;
   }
 }
 
 function getColor(i) {
-  return `hsl(${i / maxIterations * 360},100%,50%)`;
+  return `hsla(${i / maxIterations * 360},100%,75%,${i / maxIterations})`;
 }
 
 class MainCtrl {
