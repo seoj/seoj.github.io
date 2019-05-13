@@ -3,8 +3,6 @@
   "short_name": "PWA Playground (short_name)",
   "start_url": "index.html",
   "display": "standalone",
-  "background_color": "blue",
-  "theme_color": "red",
   "icons": [{
     "src": "icon.png",
       "sizes": "192x192",
