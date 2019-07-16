@@ -25,6 +25,7 @@
     }
   </script>
 
+  <script src="https://apis.google.com/js/platform.js"></script>
 </head>
 
 <body>
@@ -33,4 +34,30 @@
 
   <a href="https://www.google.com" target="_blank">Popup to non-PWA site!</a>
   <a href="https://www.google.com">Redirect to non-PWA site!</a>
+
+  <div id="signInWithGoogle"></div>
+
+  <script>
+    gapi.load('auth2:signin2', () => {
+      afterLoad();
+    });
+
+    async function afterLoad() {
+      const googleAuth = await gapi.auth2.init({
+        'client_id': '781236983654-n7iuuq21tjh2stsaec1c3e8uaouhqn01.apps.googleusercontent.com',
+      });
+
+      if (googleAuth.isSignedIn.get()) {
+        await googleAuth.signOut();
+      }
+
+      gapi.signin2.render('signInWithGoogle', {
+        'onsuccess': () => handleSignInSuccess(),
+      });
+    }
+
+    function handleSignInSuccess() {
+
+    }
+  </script>
 </body>
