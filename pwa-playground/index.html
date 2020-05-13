@@ -24,40 +24,19 @@
       });
     }
   </script>
-
-  <script src="https://apis.google.com/js/platform.js"></script>
 </head>
 
 <body>
-  <h1>hello world!</h1>
-  <h2>BUILD 2</h2>
-
-  <a href="https://www.google.com" target="_blank">Popup to non-PWA site!</a>
-  <a href="https://www.google.com">Redirect to non-PWA site!</a>
-
-  <div id="signInWithGoogle"></div>
-
-  <script>
-    gapi.load('auth2:signin2', () => {
-      afterLoad();
-    });
-
-    async function afterLoad() {
-      const googleAuth = await gapi.auth2.init({
-        'client_id': '1060493815643-6kfpno3ref65qodsael85r98p7ptpdg2.apps.googleusercontent.com',
-      });
-
-      if (googleAuth.isSignedIn.get()) {
-        await googleAuth.signOut();
-      }
-
-      gapi.signin2.render('signInWithGoogle', {
-        'onsuccess': () => handleSignInSuccess(),
-      });
-    }
-
-    function handleSignInSuccess() {
-
-    }
-  </script>
+  <div>
+    <div>type="search" only</div>
+    <input type="search">
+  </div>
+  <div>
+    <div>name="search" only</div>
+    <input name="search">
+  </div>
+  <div>
+    <div>type="search" and name="search"</div>
+    <input name="search" type="search">
+  </div>
 </body>
