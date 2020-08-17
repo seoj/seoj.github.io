@@ -1,3 +1,21 @@
 <!doctype html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<input type="file" capture accept="images/*">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<input id="file" type="file" capture accept="image/*"></file>
+<pre id="output"></pre>
+<script>
+  /** @type {HTMLInputElement} */
+  const fileEl = document.getElementById('file');
+  const outputEl = document.getElementById('output');
+
+  fileEl.addEventListener('input', () => onInput());
+
+  function onInput() {
+    const file = fileEl.files[0];
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      alert('onload()');
+      outputEl.innerText = `file.type = ${file.type}\nfileReader.result.byteLength = ${fileReader.result.byteLength}`;
+    };
+    fileReader.readAsArrayBuffer(file);
+  }
+</script>
