@@ -54,6 +54,7 @@ export class Snake {
   eat() {
     this.length++;
     this.speed++;
+    navigator.vibrate(100);
   }
 
   private resetMoveCountdown() {

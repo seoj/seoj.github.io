@@ -34,6 +34,7 @@ export class Model {
       case GameState.running:
         this.snake.next();
         if (this.snake.collided()) {
+          navigator.vibrate(100);
           this.gameState = GameState.over;
           break;
         }
