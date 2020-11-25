@@ -234,6 +234,7 @@ var Model = /*#__PURE__*/function () {
           this.snake.next();
 
           if (this.snake.collided()) {
+            navigator.vibrate(100);
             this.gameState = _game_state.GameState.over;
             break;
           }
@@ -411,6 +412,7 @@ var Snake = /*#__PURE__*/function () {
     value: function eat() {
       this.length++;
       this.speed++;
+      navigator.vibrate(100);
     }
   }, {
     key: "resetMoveCountdown",
