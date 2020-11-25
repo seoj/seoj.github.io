@@ -1,6 +1,23 @@
+@font-face {
+  font-family: 'VT323';
+  src: url('assets/fonts/VT323/VT323-Regular.ttf');
+}
+
+body {
+  font-family: 'VT323';
+  background-color: #000;
+}
+
+#score {
+  font-size: 24px;
+  left: 0;
+  position: fixed;
+  top: 0;
+  color: #fff;
+}
+
 #container {
   align-items: center;
-  background-color: black;
   bottom: 0;
   display: flex;
   justify-content: center;
@@ -11,5 +28,17 @@
 }
 
 canvas {
-  border: 2px solid white;
+  border: 1px solid #fff;
+}
+
+@media(orientation:landscape) {
+  canvas {
+    height: 100%;
+  }
+}
+
+@media(orientation:portrait) {
+  canvas {
+    width: 100%;
+  }
 }

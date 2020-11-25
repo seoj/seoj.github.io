@@ -6,7 +6,7 @@
   "scripts": {
     "typescript": "tsc",
     "prebrowserify": "npm run typescript",
-    "browserify": "browserify dist/main.js -o dist/bundle.js -t [ babelify --presets [ @babel/env ] ]",
+    "browserify": "browserify build/main.js -o dist/bundle.js -t [ babelify --presets [ @babel/env ] ]",
     "preuglifyjs": "npm run browserify",
     "uglifyjs": "uglifyjs -c -m -- dist/bundle.js > dist/bundle.min.js",
     "build": "npm run uglifyjs"

@@ -1,14 +1,14 @@
 export class Point {
   constructor(
-    readonly row: number,
-    readonly col: number,
+    public x: number,
+    public y: number,
   ) { }
 
   equals(other: Point) {
-    return this.row === other.row && this.col === other.col;
+    return this.x === other.x && this.y === other.y;
   }
 
   add(other: Point) {
-    return new Point(this.row + other.row, this.col + other.col);
+    return new Point(this.x + other.x, this.y + other.y);
   }
 }
