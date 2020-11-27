@@ -1,0 +1,25 @@
+{
+  "name": "invaders",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "typescript": "tsc",
+    "prebrowserify": "npm run typescript",
+    "browserify": "browserify build/main.js -o dist/bundle.js -t [ babelify --presets [ @babel/env ] --plugins [ @babel/transform-runtime ] ]",
+    "preuglifyjs": "npm run browserify",
+    "uglifyjs": "uglifyjs -c -m -- dist/bundle.js > dist/bundle.min.js",
+    "build": "npm run uglifyjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
+    "babelify": "^10.0.0",
+    "browserify": "^17.0.0",
+    "typescript": "^4.1.2",
+    "uglify-js": "^3.12.0"
+  }
+}
