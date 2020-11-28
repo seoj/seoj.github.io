@@ -1,9 +1,10 @@
 import { Bullet } from "./bullet";
+import { Explosion } from "./explosion";
 import { Game } from "./game";
 import { OnDraw, OnUpdate } from "./lifecycle";
 import { Point } from "./point";
 import { Rectangle } from "./rectangle";
-import { rand } from "./utils";
+import { pickRand, rand } from "./utils";
 
 export class Alien implements OnUpdate, OnDraw {
   rectangle = new Rectangle(
@@ -14,6 +15,7 @@ export class Alien implements OnUpdate, OnDraw {
   vx = 0;
   vy = 0;
   cooldown = 0;
+  image: HTMLImageElement;
 
   private resetCooldown() {
     this.cooldown = this.game.msToFrames(500);
@@ -59,10 +61,13 @@ export class Alien implements OnUpdate, OnDraw {
 
   draw(ctx: CanvasRenderingContext2D) {
     const position = this.rectangle.position;
-    ctx.drawImage(this.game.assets.alien, position.x, position.y);
+    ctx.drawImage(this.image, position.x, position.y);
   }
 
   die() {
+    const explosion = new Explosion(this.game);
+    explosion.position = this.rectangle.position;
+    this.game.entities.push(explosion);
     this.game.deleteList.push(this);
   }
 }

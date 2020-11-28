@@ -19,6 +19,7 @@ export class Game {
 
     for (let r = 0; r < 10; r++) {
       const alien = new Alien(this);
+      alien.image = this.assets.aliens[r % this.assets.aliens.length];
       this.entities.push(alien);
     }
   }
@@ -83,9 +84,8 @@ export class Game {
     });
 
     this.ctx.imageSmoothingEnabled = false;
-    this.ctx.fillStyle = '#000';
     const canvas = this.ctx.canvas;
-    this.ctx.fillRect(0, 0, canvas.width, canvas.height);
+    this.ctx.drawImage(this.assets.bg, 0, 0);
 
     this.entities.filter(e => e.draw).forEach(e => e.draw(this.ctx));
   }

@@ -14,6 +14,8 @@ var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/creat
 
 var _bullet = require("./bullet");
 
+var _explosion = require("./explosion");
+
 var _point = require("./point");
 
 var _rectangle = require("./rectangle");
@@ -74,11 +76,14 @@ var Alien = /*#__PURE__*/function () {
     key: "draw",
     value: function draw(ctx) {
       var position = this.rectangle.position;
-      ctx.drawImage(this.game.assets.alien, position.x, position.y);
+      ctx.drawImage(this.image, position.x, position.y);
     }
   }, {
     key: "die",
     value: function die() {
+      var explosion = new _explosion.Explosion(this.game);
+      explosion.position = this.rectangle.position;
+      this.game.entities.push(explosion);
       this.game.deleteList.push(this);
     }
   }]);
@@ -87,7 +92,7 @@ var Alien = /*#__PURE__*/function () {
 
 exports.Alien = Alien;
 
-},{"./bullet":3,"./point":6,"./rectangle":7,"./utils":9,"@babel/runtime/helpers/classCallCheck":10,"@babel/runtime/helpers/createClass":11,"@babel/runtime/helpers/interopRequireDefault":12}],2:[function(require,module,exports){
+},{"./bullet":3,"./explosion":4,"./point":7,"./rectangle":8,"./utils":10,"@babel/runtime/helpers/classCallCheck":11,"@babel/runtime/helpers/createClass":12,"@babel/runtime/helpers/interopRequireDefault":13}],2:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -138,6 +143,7 @@ var __awaiter = void 0 && (void 0).__awaiter || function (thisArg, _arguments, P
 var Assets = /*#__PURE__*/function () {
   function Assets() {
     (0, _classCallCheck2["default"])(this, Assets);
+    this.aliens = [];
   }
 
   (0, _createClass2["default"])(Assets, [{
@@ -149,17 +155,58 @@ var Assets = /*#__PURE__*/function () {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _load('assets/images/ship.png');
+                return _load('assets/images/background.png');
 
               case 2:
-                this.ship = _context.sent;
+                this.bg = _context.sent;
                 _context.next = 5;
-                return _load('assets/images/alien.png');
+                return _load('assets/images/ship.png');
 
               case 5:
-                this.alien = _context.sent;
+                this.ship = _context.sent;
+                _context.t0 = this.aliens;
+                _context.next = 9;
+                return _load('assets/images/alien0.png');
 
-              case 6:
+              case 9:
+                _context.t1 = _context.sent;
+
+                _context.t0.push.call(_context.t0, _context.t1);
+
+                _context.t2 = this.aliens;
+                _context.next = 14;
+                return _load('assets/images/alien1.png');
+
+              case 14:
+                _context.t3 = _context.sent;
+
+                _context.t2.push.call(_context.t2, _context.t3);
+
+                _context.t4 = this.aliens;
+                _context.next = 19;
+                return _load('assets/images/alien2.png');
+
+              case 19:
+                _context.t5 = _context.sent;
+
+                _context.t4.push.call(_context.t4, _context.t5);
+
+                _context.t6 = this.aliens;
+                _context.next = 24;
+                return _load('assets/images/alien3.png');
+
+              case 24:
+                _context.t7 = _context.sent;
+
+                _context.t6.push.call(_context.t6, _context.t7);
+
+                _context.next = 28;
+                return _load('assets/images/explosion.png');
+
+              case 28:
+                this.explosion = _context.sent;
+
+              case 29:
               case "end":
                 return _context.stop();
             }
@@ -183,7 +230,7 @@ function _load(src) {
   });
 }
 
-},{"@babel/runtime/helpers/classCallCheck":10,"@babel/runtime/helpers/createClass":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/regenerator":13}],3:[function(require,module,exports){
+},{"@babel/runtime/helpers/classCallCheck":11,"@babel/runtime/helpers/createClass":12,"@babel/runtime/helpers/interopRequireDefault":13,"@babel/runtime/regenerator":14}],3:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -294,7 +341,48 @@ var Bullet = /*#__PURE__*/function () {
 
 exports.Bullet = Bullet;
 
-},{"./alien":1,"./point":6,"./rectangle":7,"./ship":8,"@babel/runtime/helpers/classCallCheck":10,"@babel/runtime/helpers/createClass":11,"@babel/runtime/helpers/interopRequireDefault":12}],4:[function(require,module,exports){
+},{"./alien":1,"./point":7,"./rectangle":8,"./ship":9,"@babel/runtime/helpers/classCallCheck":11,"@babel/runtime/helpers/createClass":12,"@babel/runtime/helpers/interopRequireDefault":13}],4:[function(require,module,exports){
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Explosion = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
+var Explosion = /*#__PURE__*/function () {
+  function Explosion(game) {
+    (0, _classCallCheck2["default"])(this, Explosion);
+    this.game = game;
+    this.ttl = 30;
+  }
+
+  (0, _createClass2["default"])(Explosion, [{
+    key: "update",
+    value: function update() {
+      if (this.ttl === 0) {
+        this.game.deleteList.push(this);
+      }
+
+      this.ttl--;
+    }
+  }, {
+    key: "draw",
+    value: function draw(ctx) {
+      ctx.drawImage(this.game.assets.explosion, this.position.x, this.position.y);
+    }
+  }]);
+  return Explosion;
+}();
+
+exports.Explosion = Explosion;
+
+},{"@babel/runtime/helpers/classCallCheck":11,"@babel/runtime/helpers/createClass":12,"@babel/runtime/helpers/interopRequireDefault":13}],5:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -369,6 +457,7 @@ var Game = /*#__PURE__*/function () {
 
       for (var r = 0; r < 10; r++) {
         var alien = new _alien.Alien(this);
+        alien.image = this.assets.aliens[r % this.assets.aliens.length];
         this.entities.push(alien);
       }
     }
@@ -478,9 +567,8 @@ var Game = /*#__PURE__*/function () {
         _this2.draw();
       });
       this.ctx.imageSmoothingEnabled = false;
-      this.ctx.fillStyle = '#000';
       var canvas = this.ctx.canvas;
-      this.ctx.fillRect(0, 0, canvas.width, canvas.height);
+      this.ctx.drawImage(this.assets.bg, 0, 0);
       this.entities.filter(function (e) {
         return e.draw;
       }).forEach(function (e) {
@@ -493,7 +581,7 @@ var Game = /*#__PURE__*/function () {
 
 exports.Game = Game;
 
-},{"./alien":1,"./assets":2,"./point":6,"./rectangle":7,"./ship":8,"@babel/runtime/helpers/classCallCheck":10,"@babel/runtime/helpers/createClass":11,"@babel/runtime/helpers/interopRequireDefault":12,"@babel/runtime/regenerator":13}],5:[function(require,module,exports){
+},{"./alien":1,"./assets":2,"./point":7,"./rectangle":8,"./ship":9,"@babel/runtime/helpers/classCallCheck":11,"@babel/runtime/helpers/createClass":12,"@babel/runtime/helpers/interopRequireDefault":13,"@babel/runtime/regenerator":14}],6:[function(require,module,exports){
 "use strict";
 
 var _game = require("./game");
@@ -502,7 +590,7 @@ var game = new _game.Game();
 game.ctx = document.querySelector('canvas').getContext('2d');
 game.start();
 
-},{"./game":4}],6:[function(require,module,exports){
+},{"./game":5}],7:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -522,7 +610,7 @@ var Point = function Point(x, y) {
 
 exports.Point = Point;
 
-},{"@babel/runtime/helpers/classCallCheck":10,"@babel/runtime/helpers/interopRequireDefault":12}],7:[function(require,module,exports){
+},{"@babel/runtime/helpers/classCallCheck":11,"@babel/runtime/helpers/interopRequireDefault":13}],8:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -562,7 +650,7 @@ var Rectangle = /*#__PURE__*/function () {
 
 exports.Rectangle = Rectangle;
 
-},{"./point":6,"@babel/runtime/helpers/classCallCheck":10,"@babel/runtime/helpers/createClass":11,"@babel/runtime/helpers/interopRequireDefault":12}],8:[function(require,module,exports){
+},{"./point":7,"@babel/runtime/helpers/classCallCheck":11,"@babel/runtime/helpers/createClass":12,"@babel/runtime/helpers/interopRequireDefault":13}],9:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -709,19 +797,29 @@ var Ship = /*#__PURE__*/function () {
 
 exports.Ship = Ship;
 
-},{"./alien":1,"./bullet":3,"./point":6,"./rectangle":7,"@babel/runtime/helpers/classCallCheck":10,"@babel/runtime/helpers/createClass":11,"@babel/runtime/helpers/interopRequireDefault":12}],9:[function(require,module,exports){
+},{"./alien":1,"./bullet":3,"./point":7,"./rectangle":8,"@babel/runtime/helpers/classCallCheck":11,"@babel/runtime/helpers/createClass":12,"@babel/runtime/helpers/interopRequireDefault":13}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.rand = rand;
+exports.randInt = randInt;
+exports.pickRand = pickRand;
 
 function rand(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-},{}],10:[function(require,module,exports){
+function randInt(min, max) {
+  return Math.floor(rand(min, max));
+}
+
+function pickRand(arr) {
+  return arr[randInt(0, arr.length)];
+}
+
+},{}],11:[function(require,module,exports){
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -729,7 +827,7 @@ function _classCallCheck(instance, Constructor) {
 }
 
 module.exports = _classCallCheck;
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 function _defineProperties(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
@@ -747,7 +845,7 @@ function _createClass(Constructor, protoProps, staticProps) {
 }
 
 module.exports = _createClass;
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
     "default": obj
@@ -755,10 +853,10 @@ function _interopRequireDefault(obj) {
 }
 
 module.exports = _interopRequireDefault;
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 module.exports = require("regenerator-runtime");
 
-},{"regenerator-runtime":14}],14:[function(require,module,exports){
+},{"regenerator-runtime":15}],15:[function(require,module,exports){
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -1508,4 +1606,4 @@ try {
   Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}]},{},[5]);
+},{}]},{},[6]);
