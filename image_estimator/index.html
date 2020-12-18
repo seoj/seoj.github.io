@@ -1,7 +1,56 @@
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="dist/bundle.js" defer></script>
-<input type="file" id="file-input" />
-<canvas id="source-canvas"></canvas>
-<canvas id="result-canvas"></canvas>
-<pre id="output"></pre>
+<style>
+  #container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #canvases {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+  }
+
+  #canvases>div {
+    flex: 1;
+  }
+
+  @media(orientation: portrait) {
+    #canvases {
+      flex-direction: column;
+    }
+
+    #canvases>div>canvas {
+      height: 100%;
+    }
+  }
+
+  @media(orientation: landscape) {
+    #canvases {
+      flex-direction: row;
+    }
+
+    #canvases>div>canvas {
+      height: 100%;
+    }
+  }
+</style>
+<div id="container">
+  <input type="file" id="file-input" />
+  <div id="canvases">
+    <div>
+      <canvas id="source-canvas"></canvas>
+    </div>
+    <div>
+      <canvas id="result-canvas"></canvas>
+    </div>
+  </div>
+  <pre id="output"></pre>
+</div>
