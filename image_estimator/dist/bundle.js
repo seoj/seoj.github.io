@@ -29,7 +29,7 @@ class Chromosome {
             const newLength = this.triangles.length + rand_1.randSign();
             if (newLength > 0) {
                 if (newLength < this.triangles.length) {
-                    this.triangles = this.triangles.slice(0, newLength);
+                    this.triangles.splice(rand_1.randInt(this.triangles.length), 1);
                 }
                 else {
                     this.triangles.push(triangle_1.Triangle.create());
