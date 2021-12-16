@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "Connect4",
+  "short_name": "Connect4",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#000",
+  "description": "Connect4",
+  "icons": [
+    {
+      "src": "assets/icon.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ]
+}
