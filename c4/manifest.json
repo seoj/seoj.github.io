@@ -3,7 +3,7 @@
   "name": "Connect4",
   "short_name": "Connect4",
   "start_url": ".",
-  "display": "standalone",
+  "display": "fullscreen",
   "background_color": "#000",
   "description": "Connect4",
   "icons": [
