@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "outDir": "build",
-    "target": "ES2015"
-  },
-  "include": [
-    "src/**/*.ts"
-  ]
-}
