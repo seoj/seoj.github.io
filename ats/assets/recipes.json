@@ -1,0 +1,434 @@
+[
+  {
+    "name": "Biscuits",
+    "ingredients": [
+      [
+        "Flour"
+      ],
+      [
+        "Berries",
+        "Herbs",
+        "Roots"
+      ]
+    ]
+  },
+  {
+    "name": "Jerky",
+    "ingredients": [
+      [
+        "Meat",
+        "Insects"
+      ],
+      [
+        "Coal",
+        "Oil",
+        "Sea Marrow",
+        "Wood"
+      ]
+    ]
+  },
+  {
+    "name": "Pickled Goods",
+    "ingredients": [
+      [
+        "Berries",
+        "Eggs",
+        "Mushrooms",
+        "Roots",
+        "Vegetables"
+      ],
+      [
+        "Barrels",
+        "Pottery",
+        "Waterskins"
+      ]
+    ]
+  },
+  {
+    "name": "Pie",
+    "ingredients": [
+      [
+        "Flour"
+      ],
+      [
+        "Berries",
+        "Eggs",
+        "Herbs",
+        "Insects",
+        "Meat"
+      ]
+    ]
+  },
+  {
+    "name": "Porridge",
+    "ingredients": [
+      [
+        "Grain",
+        "Herbs",
+        "Mushrooms",
+        "Vegetables"
+      ],
+      [
+        "Drizzle Water",
+        "Clearance Water",
+        "Storm Water"
+      ]
+    ]
+  },
+  {
+    "name": "Bricks",
+    "ingredients": [
+      [
+        "Clay"
+      ]
+    ]
+  },
+  {
+    "name": "Fabric",
+    "ingredients": [
+      [
+        "Leather"
+      ]
+    ]
+  },
+  {
+    "name": "Pipes",
+    "ingredients": [
+      [
+        "Copper Bars"
+      ]
+    ]
+  },
+  {
+    "name": "Planks",
+    "ingredients": [
+      [
+        "Wood"
+      ]
+    ]
+  },
+  {
+    "name": "Coats",
+    "ingredients": [
+      [
+        "Fabric"
+      ]
+    ]
+  },
+  {
+    "name": "Ale",
+    "ingredients": [
+      [
+        "Grain",
+        "Roots"
+      ],
+      [
+        "Barrels",
+        "Pottery",
+        "Waterskins"
+      ]
+    ]
+  },
+  {
+    "name": "Incense",
+    "ingredients": [
+      [
+        "Herbs",
+        "Insects",
+        "Resin",
+        "Roots"
+      ],
+      [
+        "Coal",
+        "Oil",
+        "Sea Marrow",
+        "Wood"
+      ]
+    ]
+  },
+  {
+    "name": "Scrolls",
+    "ingredients": [
+      [
+        "Leather",
+        "Plant Fiber",
+        "Wood"
+      ],
+      [
+        "Pigment",
+        "Wine"
+      ]
+    ]
+  },
+  {
+    "name": "Tea",
+    "ingredients": [
+      [
+        "Herbs",
+        "Mushrooms",
+        "Pigment",
+        "Resin",
+        "Roots"
+      ],
+      [
+        "Clearance Water",
+        "Drizzle Water",
+        "Storm Water"
+      ]
+    ]
+  },
+  {
+    "name": "Training Gear",
+    "ingredients": [
+      [
+        "Copper Bars",
+        "Crystalized Dew",
+        "Stone"
+      ],
+      [
+        "Planks",
+        "Reed"
+      ]
+    ]
+  },
+  {
+    "name": "Wine",
+    "ingredients": [
+      [
+        "Berries",
+        "Mushrooms",
+        "Reed"
+      ],
+      [
+        "Barrels",
+        "Pottery",
+        "Waterskins"
+      ]
+    ]
+  },
+  {
+    "name": "Barrels",
+    "ingredients": [
+      [
+        "Copper Bars",
+        "Crystalized Dew"
+      ],
+      [
+        "Planks"
+      ]
+    ]
+  },
+  {
+    "name": "Copper Bars",
+    "ingredients": [
+      [
+        "Copper Ore"
+      ],
+      [
+        "Coal",
+        "Oil",
+        "Sea Marrow",
+        "Wood"
+      ]
+    ]
+  },
+  {
+    "name": "Crystalized Dew",
+    "ingredients": [
+      [
+        "Herbs",
+        "Insects",
+        "Resin",
+        "Vegetables"
+      ],
+      [
+        "Clay",
+        "Stone"
+      ],
+      [
+        "Clearance Water",
+        "Drizzle Water",
+        "Storm Water"
+      ]
+    ]
+  },
+  {
+    "name": "Flour",
+    "ingredients": [
+      [
+        "Grain",
+        "Mushrooms",
+        "Roots"
+      ]
+    ]
+  },
+  {
+    "name": "Leather",
+    "ingredients": [
+      [
+        "Grain",
+        "Plant Fiber",
+        "Reed",
+        "Vegetables"
+      ]
+    ]
+  },
+  {
+    "name": "Pigment",
+    "ingredients": [
+      [
+        "Berries",
+        "Coal",
+        "Copper Ore",
+        "Insects"
+      ]
+    ]
+  },
+  {
+    "name": "Pottery",
+    "ingredients": [
+      [
+        "Clay"
+      ],
+      [
+        "Coal",
+        "Oil",
+        "Sea Marrow",
+        "Wood"
+      ]
+    ]
+  },
+  {
+    "name": "Waterskins",
+    "ingredients": [
+      [
+        "Leather"
+      ],
+      [
+        "Meat",
+        "Oil"
+      ]
+    ]
+  },
+  {
+    "name": "Amber",
+    "ingredients": [
+      [
+        "Resin"
+      ],
+      [
+        "Clearance Water",
+        "Oil"
+      ]
+    ]
+  },
+  {
+    "name": "Pack of Building Materials",
+    "ingredients": [
+      [
+        "Bricks",
+        "Copper Ore",
+        "Fabric",
+        "Planks"
+      ]
+    ]
+  },
+  {
+    "name": "Pack of Crops",
+    "ingredients": [
+      [
+        "Grain",
+        "Mushrooms",
+        "Roots",
+        "Vegetables"
+      ]
+    ]
+  },
+  {
+    "name": "Pack of Luxury Goods",
+    "ingredients": [
+      [
+        "Ale",
+        "Incense",
+        "Scrolls",
+        "Tea",
+        "Training Gear",
+        "Wine"
+      ]
+    ]
+  },
+  {
+    "name": "Pack of Provisions",
+    "ingredients": [
+      [
+        "Berries",
+        "Eggs",
+        "Herbs",
+        "Insects",
+        "Meat"
+      ]
+    ]
+  },
+  {
+    "name": "Pack of Trade Goods",
+    "ingredients": [
+      [
+        "Barrels",
+        "Flour",
+        "Oil",
+        "Pigment",
+        "Pottery",
+        "Waterskins"
+      ]
+    ]
+  },
+  {
+    "name": "Coal",
+    "ingredients": [
+      [
+        "Wood"
+      ]
+    ]
+  },
+  {
+    "name": "Oil",
+    "ingredients": [
+      [
+        "Grain",
+        "Meat",
+        "Vegetables",
+        "Plant Fiber"
+      ]
+    ]
+  },
+  {
+    "name": "Tools",
+    "ingredients": [
+      [
+        "Wood",
+        "Planks"
+      ],
+      [
+        "Copper Bars",
+        "Crystalized Dew"
+      ]
+    ]
+  },
+  {
+    "name": "Skewers",
+    "ingredients": [
+      [
+        "Insects",
+        "Jerky",
+        "Meat",
+        "Mushrooms"
+      ],
+      [
+        "Berries",
+        "Eggs",
+        "Roots",
+        "Vegetables"
+      ]
+    ]
+  }
+]
